@@ -1,14 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import beepSound from "../assets/beep.mp3";
+import { useMediaQuery } from "react-responsive";
 
 export default function ScannerComponent() {
   const [scannedData, setScannedData] = useState([]);
   const [cameraActive, setCameraActive] = useState(true);
   const [flashEnabled, setFlashEnabled] = useState(false);
+  const [lastScannedTime, setLastScannedTime] = useState(0);
+
+  // Responsive width and height using react-responsive
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 600px)" });
+  const scannerWidth = isSmallScreen ? 300 : 500;
+  const scannerHeight = isSmallScreen ? 300 : 500;
+
+  const SCAN_DELAY = 2000; // 2 seconds delay
 
   const handleScan = (result) => {
-    if (result) {
+    const currentTime = Date.now();
+    if (result && currentTime - lastScannedTime > SCAN_DELAY) {
+      setLastScannedTime(currentTime);
       setScannedData((prevData) => {
         const existingItem = prevData.find((item) => item.data === result.text);
         if (existingItem) {
@@ -55,8 +66,8 @@ export default function ScannerComponent() {
     <div>
       {cameraActive && (
         <BarcodeScannerComponent
-          width={500}
-          height={500}
+          width={scannerWidth}
+          height={scannerHeight}
           onUpdate={(err, result) => {
             if (result) handleScan(result);
             if (err) handleError(err);
@@ -66,10 +77,16 @@ export default function ScannerComponent() {
         />
       )}
       <div style={{ marginTop: 20 }}>
-        <button onClick={() => setCameraActive(!cameraActive)}>
+        <button
+          onClick={() => setCameraActive(!cameraActive)}
+          style={{ marginRight: 10 }}
+        >
           {cameraActive ? "Stop Camera" : "Start Camera"}
         </button>
-        <button onClick={() => setFlashEnabled(!flashEnabled)}>
+        <button
+          onClick={() => setFlashEnabled(!flashEnabled)}
+          style={{ marginRight: 10 }}
+        >
           {flashEnabled ? "Turn Flash Off" : "Turn Flash On"}
         </button>
         <h3>Scanned Results:</h3>
