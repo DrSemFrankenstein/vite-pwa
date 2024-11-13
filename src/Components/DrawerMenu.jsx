@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Drawer, Menu } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import MenuItems from "../assets/MenuItems";
+import InstallAppButton from "./InstallAppButton";
 
 const DrawerMenu = () => {
   const [visible, setVisible] = useState(false);
@@ -36,6 +37,7 @@ const DrawerMenu = () => {
             </Menu.Item>
           ))}
         </Menu>
+        <InstallAppButton />
       </Drawer>
     </>
   );
