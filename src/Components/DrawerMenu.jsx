@@ -1,13 +1,8 @@
+// DrawerMenu.js
 import React, { useState } from "react";
 import { Drawer, Menu } from "antd";
-import {
-  HomeOutlined,
-  InfoCircleOutlined,
-  BranchesOutlined,
-  MenuOutlined,
-  BugOutlined,
-} from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { MenuOutlined } from "@ant-design/icons";
+import MenuItems from "../assets/MenuItems";
 
 const DrawerMenu = () => {
   const [visible, setVisible] = useState(false);
@@ -35,29 +30,11 @@ const DrawerMenu = () => {
           defaultSelectedKeys={["/"]}
           style={{ borderRight: 0 }}
         >
-          <Menu.Item key="/" icon={<HomeOutlined />} onClick={closeDrawer}>
-            <Link to="/">Home</Link>
-          </Menu.Item>
-          <Menu.Item
-            key="/about"
-            icon={<InfoCircleOutlined />}
-            onClick={closeDrawer}
-          >
-            <Link to="/about">About</Link>
-          </Menu.Item>
-          {/* <Menu.Item
-            key="/reduxpage"
-            icon={<BranchesOutlined />}
-            onClick={closeDrawer}
-          >
-            <Link to="/reduxpage">Redux</Link>
-          </Menu.Item> */}
-          <Menu.Item key="/test" icon={<BugOutlined />} onClick={closeDrawer}>
-            <Link to="/test">Tester</Link>
-          </Menu.Item>
-          <Menu.Item key="/test2" icon={<BugOutlined />} onClick={closeDrawer}>
-            <Link to="/test2">Tester2</Link>
-          </Menu.Item>
+          {MenuItems.map((item, index) => (
+            <Menu.Item key={index} icon={item.icon} onClick={closeDrawer}>
+              {item.title}
+            </Menu.Item>
+          ))}
         </Menu>
       </Drawer>
     </>

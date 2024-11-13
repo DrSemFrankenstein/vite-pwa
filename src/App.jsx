@@ -9,31 +9,14 @@ import DrawerMenu from "./Components/DrawerMenu"; // Import DrawerMenu
 import "./App.css"; // Assuming this includes the styles
 import Tester from "./Pages/Tester";
 import Tester2 from "./Pages/Tester2";
+import MenuItems from "./assets/MenuItems";
 
 function App() {
-
-  const breadcrumbItems = [
-    {
-      title: <Link to="/">Home</Link>,
-    },
-    {
-      title: <Link to="/about">About</Link>,
-    },
-    // {
-    //   title: <Link to="/reduxpage">Redux</Link>,
-    // },
-    {
-      title: <Link to="/test">Tester</Link>,
-    },
-    {
-      title: <Link to="/test2">Tester2</Link>,
-    },
-  ];
-
   return (
     <>
       <ScreenMode />
-      <Router>
+      <Router basename="/vite-pwa">
+        {" "}
         <div>
           {/* Static Breadcrumb Navigation and Drawer Menu for Small Screens */}
           <div
@@ -46,7 +29,7 @@ function App() {
           >
             {/* Breadcrumb for larger screens */}
             <div className="breadcrumb-for-large">
-              <Breadcrumb style={{ margin: 0 }} items={breadcrumbItems} />
+              <Breadcrumb style={{ margin: 0 }} items={MenuItems} />
             </div>
 
             <ThemeToggle />
