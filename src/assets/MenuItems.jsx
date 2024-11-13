@@ -1,6 +1,10 @@
 // MenuItems.js (or MenuItems.jsx)
 import { Link } from "react-router-dom";
-import { HomeOutlined, InfoCircleOutlined, BranchesOutlined, BugOutlined } from "@ant-design/icons";
+import {
+  HomeOutlined,
+  InfoCircleOutlined,
+  BugOutlined,
+} from "@ant-design/icons";
 
 const MenuItems = [
   {
@@ -12,11 +16,11 @@ const MenuItems = [
     icon: <InfoCircleOutlined />,
   },
   {
-    title: <Link to="/reduxpage">Redux</Link>,
-    icon: <BranchesOutlined />,
+    title: <Link to="/test">Tester</Link>,
+    icon: <BugOutlined />,
   },
   {
-    title: <Link to="/test">Tester</Link>,
+    title: <Link to="/test2">Tester</Link>,
     icon: <BugOutlined />,
   },
 ];
