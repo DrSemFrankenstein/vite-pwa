@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
+import beepSound from "../assets/beep.mp3";
 
 export default function ScannerComponent() {
   const [scannedData, setScannedData] = useState([]);
@@ -30,7 +31,7 @@ export default function ScannerComponent() {
   };
 
   const makeBeep = () => {
-    const audio = new Audio("https://www.soundjay.com/button/beep-07.wav");
+    const audio = new Audio(beepSound);
     audio.play();
   };
 
