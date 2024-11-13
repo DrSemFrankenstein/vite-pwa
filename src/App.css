@@ -1,0 +1,84 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  width: 100%;
+  height: 93%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Center content vertically */
+  align-items: center;
+  /* Center content horizontally */
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Make sure elements like cards adapt to full height */
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+
+/* Ensure the ExampleApiRequests component doesn't inherit centering */
+.api-request-container {
+  width: 100%; /* Full screen width */
+  height: 100vh; /* Full screen height */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important; /* Override centering */
+  align-items: flex-start; /* Ensure it aligns from the top-left */
+}
+
+/* Cards should not overlap */
+.card-container .ant-list-item {
+  display: block; /* Prevent card overlap */
+  width: 100%; /* Make sure each card uses full width */
+}
+
+.card-item {
+  width: 100%; /* Ensure the card stretches within its container */
+}
+
+/* Apply dynamic theme color to cards based on theme */
+body[data-theme="dark"] .api-request-container .card-item {
+  background-color: #333; /* Dark mode card background */
+}
+
+body[data-theme="light"] .api-request-container .card-item {
+  background-color: #fff; /* Light mode card background */
+}
+
+/* Additional custom card styles */
+.card-item {
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
