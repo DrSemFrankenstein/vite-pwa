@@ -1,32 +1,76 @@
-import * as React from "react";
-import { Scanner } from "@yudiel/react-qr-scanner";
+import React, { useState } from "react";
+import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 export default function ScannerComponent() {
-  const [scannedData, setScannedData] = React.useState([]);
+  const [scannedData, setScannedData] = useState([]);
+  const [cameraActive, setCameraActive] = useState(true);
+  const [flashEnabled, setFlashEnabled] = useState(false);
 
   const handleScan = (result) => {
     if (result) {
       setScannedData((prevData) => {
-        // Check if the result already exists in the list
-        const existingItem = prevData.find(item => item.data === result);
+        const existingItem = prevData.find((item) => item.data === result.text);
         if (existingItem) {
-          // Increment the counter for this result
-          return prevData.map(item => 
-            item.data === result ? { ...item, count: item.count + 1 } : item
+          return prevData.map((item) =>
+            item.data === result.text
+              ? { ...item, count: item.count + 1 }
+              : item
           );
         } else {
-          // Add new result with count 1
-          return [...prevData, { data: result, count: 1 }];
+          return [...prevData, { data: result.text, count: 1 }];
         }
       });
+      makeBeep();
+      flashScreen();
     }
+  };
+
+  const handleError = (err) => {
+    console.error(err);
+  };
+
+  const makeBeep = () => {
+    const audio = new Audio("https://www.soundjay.com/button/beep-07.wav");
+    audio.play();
+  };
+
+  const flashScreen = () => {
+    const flash = document.createElement("div");
+    flash.style.position = "fixed";
+    flash.style.top = "0";
+    flash.style.left = "0";
+    flash.style.width = "100%";
+    flash.style.height = "100%";
+    flash.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
+    flash.style.zIndex = "9999";
+    flash.style.pointerEvents = "none";
+    document.body.appendChild(flash);
+    setTimeout(() => {
+      document.body.removeChild(flash);
+    }, 100);
   };
 
   return (
     <div>
-   {/* <Scanner onScan={(result) => console.log(result)}/> */}
-      <Scanner onScan={handleScan} />
+      {cameraActive && (
+        <BarcodeScannerComponent
+          width={500}
+          height={500}
+          onUpdate={(err, result) => {
+            if (result) handleScan(result);
+            if (err) handleError(err);
+          }}
+          facingMode="environment"
+          torch={flashEnabled}
+        />
+      )}
       <div style={{ marginTop: 20 }}>
+        <button onClick={() => setCameraActive(!cameraActive)}>
+          {cameraActive ? "Stop Camera" : "Start Camera"}
+        </button>
+        <button onClick={() => setFlashEnabled(!flashEnabled)}>
+          {flashEnabled ? "Turn Flash Off" : "Turn Flash On"}
+        </button>
         <h3>Scanned Results:</h3>
         <ul>
           {scannedData.map((item, index) => (
