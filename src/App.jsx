@@ -10,6 +10,7 @@ import "./App.css"; // Assuming this includes the styles
 import Tester from "./Pages/Tester";
 import Tester2 from "./Pages/Tester2";
 import MenuItems from "./assets/MenuItems";
+import CarPlay from "./Pages/CarPlay";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
               {/* <Route path="/reduxpage" element={<ReduxPage />} /> */}
               <Route path="/test" element={<Tester />} />
               <Route path="/test2" element={<Tester2 />} />
+              <Route path="/carplay" element={<CarPlay />} />
             </Routes>
           </div>
         </div>

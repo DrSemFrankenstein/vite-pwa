@@ -1,7 +1,7 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
   width: 100%;
   height: 93%;
@@ -48,8 +48,8 @@
 
 /* Ensure the ExampleApiRequests component doesn't inherit centering */
 .api-request-container {
-  width: 100%; /* Full screen width */
-  height: 100vh; /* Full screen height */
+  width: 94vw; /* Full screen width */
+  height: 89vh; /* Full screen height */
   display: flex;
   flex-direction: column;
   justify-content: flex-start !important; /* Override centering */
@@ -82,3 +82,5 @@ body[data-theme="light"] .api-request-container .card-item {
   border-radius: 8px;
   transition: background-color 0.3s;
 }
+
+

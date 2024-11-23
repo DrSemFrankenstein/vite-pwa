@@ -4,6 +4,7 @@ import {
   HomeOutlined,
   InfoCircleOutlined,
   BugOutlined,
+  CarOutlined,
 } from "@ant-design/icons";
 
 const MenuItems = [
@@ -22,6 +23,10 @@ const MenuItems = [
   {
     title: <Link to="/test2">Tester</Link>,
     icon: <BugOutlined />,
+  },
+  {
+    title: <Link to="/carplay">CarPlay</Link>,
+    icon: <CarOutlined />,
   },
 ];
 

@@ -44,7 +44,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 /* Button Styles */
