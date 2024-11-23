@@ -119,9 +119,12 @@ const IFrameBuilder = () => {
   };
 
   const handleComponentClick = (component) => {
-    if (isEditMode) {
+    if (isEditMode && component.type === "Button") {
       setSelectedComponent(component);
-      setIsModalOpen(true); // Open modal
+      setIsModalOpen(true); // Open modal for Button settings
+    } else if (isEditMode) {
+      setSelectedComponent(component);
+      setIsModalOpen(true); // Open modal for Iframe or other components
     }
   };
 
@@ -310,13 +313,12 @@ const IFrameBuilder = () => {
                   right: "5px",
                   fontSize: "16px",
                   color: "#000",
+                  cursor: "pointer",
                 }}
                 onClick={(event) => {
-                  if (isEditMode) {
-                    event.stopPropagation(); // Stop the event from propagating to parent
-                    event.preventDefault(); // Prevent any default action (if applicable)
-                    setIsModalOpen(true);
-                  }
+                  event.stopPropagation(); // Prevents triggering the parent onClick
+                  setSelectedComponent(component); // Sets the current component for editing
+                  setIsModalOpen(true); // Opens the modal
                 }}
               />
               {component.type === "Iframe" && (

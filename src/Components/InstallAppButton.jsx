@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
 
 function InstallAppButton() {
-  const [isInstallPromptAvailable, setIsInstallPromptAvailable] = useState(false);
+  const [isInstallPromptAvailable, setIsInstallPromptAvailable] =
+    useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [isAppInstalled, setIsAppInstalled] = useState(false);
 
   useEffect(() => {
     // Check if the app is already installed
-    if (window.matchMedia("(display-mode: standalone)").matches || navigator.standalone) {
+    if (
+      window.matchMedia("(display-mode: standalone)").matches ||
+      navigator.standalone
+    ) {
       setIsAppInstalled(true);
     }
 
     const handleBeforeInstallPrompt = (e) => {
-      e.preventDefault();
+      console.log("beforeinstallprompt event fired");
+      e.preventDefault(); // Prevent auto-prompt
       setIsInstallPromptAvailable(true);
-      setDeferredPrompt(e);
+      setDeferredPrompt(e); // Save the event
     };
 
     const handleAppInstalled = () => {
@@ -26,15 +31,20 @@ function InstallAppButton() {
     window.addEventListener("appinstalled", handleAppInstalled);
 
     return () => {
-      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt
+      );
       window.removeEventListener("appinstalled", handleAppInstalled);
     };
   }, []);
 
   const handleInstallClick = () => {
     if (deferredPrompt) {
-      deferredPrompt.prompt();
+      console.log("Showing install prompt");
+      deferredPrompt.prompt(); // Show the install prompt
       deferredPrompt.userChoice.then((choiceResult) => {
+        console.log("User choice:", choiceResult.outcome);
         if (choiceResult.outcome === "accepted") {
           console.log("User accepted the install prompt");
         } else {
@@ -43,6 +53,8 @@ function InstallAppButton() {
         setDeferredPrompt(null);
         setIsInstallPromptAvailable(false);
       });
+    } else {
+      console.log("No deferred prompt available");
     }
   };
 

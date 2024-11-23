@@ -15,7 +15,12 @@ const DrawerMenu = () => {
     <>
       <button
         onClick={showDrawer}
-        style={{ background: "transparent", border: "none", fontSize: "16px" }}
+        style={{
+          background: "transparent",
+          border: "none",
+          fontSize: "16px",
+          cursor: "pointer",
+        }}
       >
         <MenuOutlined />
       </button>
@@ -23,7 +28,7 @@ const DrawerMenu = () => {
         title="Menu"
         placement="left"
         onClose={closeDrawer}
-        visible={visible}
+        open={visible}
         width={250}
       >
         <Menu
@@ -37,10 +42,14 @@ const DrawerMenu = () => {
             </Menu.Item>
           ))}
         </Menu>
-        <InstallAppButton />
+        {/* Install App Button */}
+        <div style={{ marginTop: "20px" }}>
+          <InstallAppButton />
+        </div>
       </Drawer>
     </>
   );
 };
 
 export default DrawerMenu;
+
